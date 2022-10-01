@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
-use App\Repositories\AdminRepositoryInterface;
+use App\Repositories\Interfaces\AdminRepositoryInterface;
 
 class AdminController extends Controller
 {

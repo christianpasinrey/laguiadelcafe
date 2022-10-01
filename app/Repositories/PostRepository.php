@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Models\Admin;
+use App\Models\Post;
 
-class AdminRepository implements Interfaces\AdminRepositoryInterface
+class PostRepository implements Interfaces\PostRepositoryInterface
 {
     protected $model;
 
-    public function __construct(Admin $model)
+    public function __construct(Post $model)
     {
         $this->model = $model;
     }
@@ -25,8 +25,10 @@ class AdminRepository implements Interfaces\AdminRepositoryInterface
 
     public function update(array $data, $id)
     {
-        $admin = $this->model->find($id);
-        return $admin->update($data);
+        $post = $this->model->find($id);
+        $post->update($data);
+
+        return $post;
     }
 
     public function delete($id)
@@ -43,5 +45,4 @@ class AdminRepository implements Interfaces\AdminRepositoryInterface
     {
         return $this->model->find($id);
     }
-
 }

@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Interfaces;
 
-use Illuminate\Database\Eloquent\Model;
-
-interface AdminRepositoryInterface extends RepositoryInterface
+interface CommentRepositoryInterface extends RepositoryInterface
 {
     public function all();
 

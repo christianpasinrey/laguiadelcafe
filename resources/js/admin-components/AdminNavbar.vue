@@ -22,11 +22,11 @@
                 </li>
                 <li class="nav-item">
                     <router-link to="/admin-posts">
-                        <a class="nav-link" href="#">Posts</a>
+                        <a class="nav-link">Posts</a>
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ajustes</a>
+                    <a class="nav-link">Ajustes</a>
                 </li>
             </ul>
         </div>
@@ -38,11 +38,11 @@
                     <DropdownContent>
                         <!--Put inside this template #content elements you want to display-->
                         <template #content>
-                            <a class="nav-link"
+                            <a class="nav-link admin-nav-link"
                                 style="color:black"
                                 href="#">Admin
                             </a>
-                            <a class="nav-link"
+                            <a class="nav-link logout-link"
                                 style="color:black"
                                 type="button"
                                 @click="logout">Salir
@@ -98,7 +98,14 @@
         color: white;
     }
     .nav-link {
-        cursor:pointer
+        cursor:pointer;
+    }
+    .admin-nav-link{
+        animation: buttonAppear 1s ease-in-out;
+    }
+
+    .logout-link{
+        animation: buttonAppear 1.25s ease-in-out;
     }
     .nav-item:hover {
         background-color: rgb(221, 190, 149);
@@ -112,5 +119,14 @@
     a{
         text-decoration: none;
         color: white;
+    }
+
+    @keyframes buttonAppear{
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
     }
 </style>

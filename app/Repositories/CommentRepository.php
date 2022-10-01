@@ -2,13 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\Admin;
+use App\Models\Comment;
+use App\Models\Post;
 
-class AdminRepository implements Interfaces\AdminRepositoryInterface
+class CommentRepository implements Interfaces\CommentRepositoryInterface
 {
     protected $model;
 
-    public function __construct(Admin $model)
+    public function __construct(Comment $model)
     {
         $this->model = $model;
     }
@@ -20,13 +21,14 @@ class AdminRepository implements Interfaces\AdminRepositoryInterface
 
     public function create(array $data)
     {
-        return $this->model->create($data);
+        $post = Post::find($data['post_id']);
+        $post->comments()->create($data);
     }
 
     public function update(array $data, $id)
     {
-        $admin = $this->model->find($id);
-        return $admin->update($data);
+        $record = $this->model->find($id);
+        return $record->update($data);
     }
 
     public function delete($id)
@@ -34,14 +36,13 @@ class AdminRepository implements Interfaces\AdminRepositoryInterface
         return $this->model->destroy($id);
     }
 
-    public function with($relations)
-    {
-        return $this->model->with($relations);
-    }
-
     public function find($id)
     {
         return $this->model->find($id);
     }
 
+    public function with($relations)
+    {
+        return $this->model->with($relations);
+    }
 }
