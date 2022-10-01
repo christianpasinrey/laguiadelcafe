@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Repositories\AdminRepositoryInterface;
 
 class AdminController extends Controller
 {
+    private $repository;
+    public function __construct(AdminRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,17 +21,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->repository->all();
     }
 
     /**
@@ -36,7 +32,7 @@ class AdminController extends Controller
      */
     public function store(StoreAdminRequest $request)
     {
-        //
+        return $this->repository->create($request->all());
     }
 
     /**
@@ -47,18 +43,7 @@ class AdminController extends Controller
      */
     public function show(Admin $admin)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Admin $admin)
-    {
-        //
+        return $this->repository->find($admin->id);
     }
 
     /**
@@ -70,7 +55,7 @@ class AdminController extends Controller
      */
     public function update(UpdateAdminRequest $request, Admin $admin)
     {
-        //
+        return $this->repository->update($request->all(), $admin->id);
     }
 
     /**
@@ -81,6 +66,6 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        //
+        return $this->repository->delete($admin->id);
     }
 }
