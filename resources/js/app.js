@@ -15,10 +15,6 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import App from './App.vue';
-import AdminApp from './AdminApp.vue';
-app.component('App', App);
-app.component('admin-app', AdminApp);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -36,5 +32,6 @@ Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, 
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
-
+import router from './router/index';
+app.use(router);
 app.mount('#app');

@@ -29,7 +29,7 @@ Route::post('/admin',[LoginController::class,'login'])->name('admin.login');
 
 Route::get('/admin/register',[RegisterController::class,'showAdminRegisterForm'])->name('admin.register-view');
 Route::post('/admin/register',[RegisterController::class,'createAdmin'])->name('admin.register');
-/* Route::post('/login',[LoginController::class,'login'])->name('login'); */
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin/dashboard',function(){
     $admin = Admin::find(auth()->id());
@@ -37,5 +37,5 @@ Route::get('/admin/dashboard',function(){
 })->middleware('auth:admin')->name('admin.dashboard');
 
 Route::group(['middleware' => 'auth:admin'], function () {
-    Route::resource('admin', '\App\Http\Controllers\AdminController');
+    Route::resource('admins', '\App\Http\Controllers\AdminController');
 });

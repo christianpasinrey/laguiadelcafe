@@ -1,36 +1,38 @@
 <template>
-    <div @click="toggle" v-on-clickaway="away">
+    <div @click="toggle">
       <slot name="toggler">
-        <button>Toggle</button>
+        <button>{{text}}</button>
       </slot>
-      <slot/>
+      <slot class="dropdown-content"/>
     </div>
   </template>
-
-  <script>
-    import { mixin as clickaway } from 'vue3-click-away';
-    export default {
-      name: 'AppDropdown',
-      mixins: [ clickaway ],
-      provide () {
-        return {
-          sharedState: this.sharedState
-        }
-      },
-      data () {
-        return {
-          sharedState: {
-            active: false
-          }
-        }
-      },
-      methods: {
-        toggle () {
-          this.sharedState.active = !this.sharedState.active
-        },
-        away () {
-          this.sharedState.active = false
-        }
-      }
+  <script setup>
+    import {provide, reactive} from 'vue';
+    const props = defineProps(['text']);
+    const sharedState = reactive({
+      active: false
+    })
+    provide('sharedState', sharedState);
+    const toggle = () => {
+      sharedState.active = !sharedState.active
     }
   </script>
+<style scoped>
+    div {
+        display: inline-block;
+        position: inherit;
+        z-index: 1;
+    }
+    button {
+        background-color: transparent;
+        color: rgb(255, 255, 255);
+        padding: 7px 8px;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: rgb(221, 190, 149);
+        color:white;
+    }
+</style>

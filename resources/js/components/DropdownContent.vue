@@ -1,17 +1,21 @@
 <template>
     <div v-if="active">
-      <slot/>
+      <slot name="content"/>
     </div>
-  </template>
-
-  <script>
-    export default {
-      name: 'AppDropdownContent',
-      inject: ['sharedState'],
-      computed: {
-        active () {
-          return this.sharedState.active
-        }
-      }
+</template>
+<script setup>
+    import {inject, computed} from 'vue';
+    const active = computed(() => {
+      return inject('sharedState').active
+    })
+</script>
+<style scoped>
+    div {
+        position:absolute;
+        z-index: 2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 6%;
+        background-color: white;
     }
-  </script>
+</style>

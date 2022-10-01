@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<admin-navbar admin="{{$admin->id}}"></admin-navbar>
+<admin-app admin="{{$admin->id}}"></admin-app>
 @endsection
