@@ -11,13 +11,19 @@ class Post extends Model
 
     protected $table = 'posts';
 
+    const STATUS_DRAFT = 0;
+    const STATUS_PUBLISHED = 1;
+
     protected $fillable = [
         'title',
         'content',
-        'user_id',
+        'admin_id',
+        'status'
     ];
 
-    public function admin()
+    protected $with = ['category','author'];
+
+    public function author()
     {
         return $this->belongsTo(Admin::class);
     }
@@ -27,4 +33,8 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(PostCategory::class);
+    }
 }

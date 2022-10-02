@@ -38,4 +38,7 @@ Route::get('/admin/dashboard',function(){
 
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::resource('admins', '\App\Http\Controllers\AdminController');
+    Route::resource('posts', '\App\Http\Controllers\PostController');
+    Route::resource('post-categories', '\App\Http\Controllers\PostCategoryController');
+    Route::resource('comments', '\App\Http\Controllers\CommentController');
 });
